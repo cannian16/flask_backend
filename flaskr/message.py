@@ -5,6 +5,34 @@ from datetime import datetime
 
 bp = Blueprint('messages', __name__, url_prefix='/messages')
 
+def basic_security_checks():
+    """基础安全检查"""
+    # 1. 检查Referer防止跨站提交
+    referer = request.headers.get('Referer', '')
+    if not any(domain in referer for domain in ['blog.cannian.space', 'localhost:5000']):
+        return False
+    
+    # 2. 检查User-Agent
+    if not request.headers.get('User-Agent'):
+        return False
+    
+    # 3. 限制频繁提交（简易版）
+    ip = request.remote_addr
+    db = get_db()
+    recent_count = db.execute(
+        "SELECT COUNT(*) FROM message WHERE ip_address = ? AND created_at > datetime('now', '-1 hour')",
+        (ip,)
+    ).fetchone()[0]
+    
+    return recent_count < 10  # 1小时内最多10条
+
+def validate_email(email):
+    """验证邮箱格式"""
+    if not email:
+        return True
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email) is not None
+
 def validate_website_url(url):
     """验证网站URL格式"""
     if not url:
@@ -73,8 +101,12 @@ def get_messages():
 @bp.route('/add', methods=['POST'])
 def create_message():
     """创建新留言"""
-    data = request.get_json()
+    # 基础安全检查
+    if not basic_security_checks():
+        return jsonify({'error': '提交过于频繁或非法请求'}), 400
     
+    data = request.get_json()
+    print(f"收到数据: {data}")
     # 验证必需字段
     if not data:
         return jsonify({'error': '请求数据不能为空'}), 400
@@ -82,6 +114,7 @@ def create_message():
     username = data.get('username', '').strip()
     website_url = data.get('website_url', '').strip()
     content = data.get('content', '').strip()
+    email = data.get('email', '').strip()
     
     # 数据验证
     if not username:
@@ -90,11 +123,17 @@ def create_message():
     if not validate_username(username):
         return jsonify({'error': '用户名格式不正确（2-50个字符，只能包含字母、数字、下划线、中文）'}), 400
     
+    if not email:
+        return jsonify({'error': '邮箱不能为空'}), 400
+    
+    if not validate_email(email):
+        return jsonify({'error': '邮箱格式不正确'}), 400
+    
     if not content:
         return jsonify({'error': '留言内容不能为空'}), 400
     
-    if len(content) > 1000:
-        return jsonify({'error': '留言内容不能超过1000个字符'}), 400
+    if len(content) > 200:
+        return jsonify({'error': '留言内容不能超过200个字符'}), 400
     
     if website_url and not validate_website_url(website_url):
         return jsonify({'error': '网站URL格式不正确'}), 400
@@ -109,10 +148,10 @@ def create_message():
         # 插入留言
         cursor = db.execute(
             '''
-            INSERT INTO message (username, website_url, content, ip_address, user_agent)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO message (username, website_url, content, ip_address, user_agent, email)
+            VALUES (?, ?, ?, ?, ?, ?)
             ''',
-            (username, website_url, content, ip_address, user_agent)
+            (username, website_url, content, ip_address, user_agent, email)
         )
         db.commit()
         
