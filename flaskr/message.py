@@ -102,8 +102,8 @@ def get_messages():
 def create_message():
     """创建新留言"""
     # 基础安全检查
-    if not basic_security_checks():
-        return jsonify({'error': '提交过于频繁或非法请求'}), 400
+    #if not basic_security_checks():
+        #return jsonify({'error': '提交过于频繁或非法请求'}), 400
     
     data = request.get_json()
     print(f"收到数据: {data}")
