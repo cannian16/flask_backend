@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, current_app
 from flaskr.db import get_db
 import re
 from datetime import datetime
+import hashlib
 
 bp = Blueprint('messages', __name__, url_prefix='/messages')
 
@@ -9,7 +10,7 @@ def basic_security_checks():
     """基础安全检查"""
     # 1. 检查Referer防止跨站提交
     referer = request.headers.get('Referer', '')
-    if not any(domain in referer for domain in ['blog.cannian.space', 'localhost:5000']):
+    if not any(domain in referer for domain in ['blog.cannian.space', 'localhost:4321']):
         return False
     
     # 2. 检查User-Agent
@@ -63,7 +64,7 @@ def get_messages():
     
     # 构建查询条件
     query = '''
-        SELECT id, username, website_url, content, created_at 
+        SELECT id, username, website_url, content, created_at , email
         FROM message 
     '''
     params = []
@@ -87,9 +88,23 @@ def get_messages():
         count_params.append(f'%{username}%')
     
     total = db.execute(count_query, count_params).fetchone()[0]
+    # 处理数据，添加邮箱哈希
+    processed_messages = []
+    for msg in messages:
+        message_dict = dict(msg)
+        
+        # 生成邮箱 SHA256
+        email = msg['email']
+        email_hash = hashlib.sha256(email.lower().encode()).hexdigest()
+        message_dict['email_hash'] = email_hash
+        
+        # 移除原始邮箱（保护隐私）
+        del message_dict['email']  # 可选：是否返回原始邮箱
+        
+        processed_messages.append(message_dict)
     
     return jsonify({
-        'messages': [dict(msg) for msg in messages],
+        'messages': processed_messages,
         'pagination': {
             'page': page,
             'limit': limit,
@@ -103,7 +118,7 @@ def create_message():
     """创建新留言"""
     # 基础安全检查
     #if not basic_security_checks():
-        #return jsonify({'error': '提交过于频繁或非法请求'}), 400
+    #    return jsonify({'error': '提交过于频繁或非法请求'}), 400
     
     data = request.get_json()
     print(f"收到数据: {data}")
@@ -157,7 +172,7 @@ def create_message():
         
         # 返回新创建的留言
         new_message = db.execute(
-            'SELECT id, username, website_url, content, created_at FROM message WHERE id = ?',
+            'SELECT id, username, website_url, content, email, created_at FROM message WHERE id = ?',
             (cursor.lastrowid,)
         ).fetchone()
         

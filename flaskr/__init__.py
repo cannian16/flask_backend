@@ -1,5 +1,4 @@
 import os
-
 from flask import Flask
 from flask_cors import CORS
 
@@ -27,6 +26,7 @@ def create_app(test_config=None):
     
     from . import db
     db.init_app(app)
+    # 留言api蓝图
     from . import message
     app.register_blueprint(message.bp)
     return app
