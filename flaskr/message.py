@@ -69,9 +69,6 @@ def get_messages():
     '''
     params = []
     
-    if username:
-        query += ' WHERE username LIKE ?'
-        params.append(f'%{username}%')
     
     query += ' ORDER BY created_at DESC LIMIT ? OFFSET ?'
     params.extend([limit, offset])
@@ -82,10 +79,6 @@ def get_messages():
     # 获取总数
     count_query = 'SELECT COUNT(*) FROM message'
     count_params = []
-    
-    if username:
-        count_query += ' WHERE username LIKE ?'
-        count_params.append(f'%{username}%')
     
     total = db.execute(count_query, count_params).fetchone()[0]
     # 处理数据，添加邮箱哈希

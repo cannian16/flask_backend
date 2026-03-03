@@ -11,3 +11,11 @@ CREATE TABLE  message (
     ip_address TEXT,
     user_agent TEXT
 );
+-- 友情链接表
+CREATE TABLE  friendlink (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    site_name TEXT NOT NULL,
+    favicon_url TEXT,
+    `description` TEXT NOT NULL,
+    site_url TEXT NOT NULL
+);
