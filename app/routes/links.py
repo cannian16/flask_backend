@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.models.link import Link
+from app.models import Link
 from app.extensions import db
 from app.utils.decorators import token_required
 
@@ -42,7 +42,8 @@ def delete_link():
     data = request.get_json()
     link_id = data.get('id')
     link = Link.query.get_or_404(link_id)
-    
+    if not link:
+        return jsonify({"error": "友链不存在"}), 404
     db.session.delete(link)
     db.session.commit()
 
@@ -58,6 +59,9 @@ def update_link():
     link_id = data.get('id')
     #查询链接并更新数据
     link = Link.query.get_or_404(link_id)
+    if not link:
+        return jsonify({"error": "友链不存在"}), 404
+    #更新链接属性，如果请求数据中没有对应属性，则保持原值不变，并去除字符串两端的空白
     link.name = data.get('name', link.name).strip()
     link.url = data.get('url', link.url).strip()
     link.description = data.get('description', link.description).strip()
