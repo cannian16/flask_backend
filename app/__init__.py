@@ -7,11 +7,11 @@ from dotenv import load_dotenv
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    load_dotenv()  # 加载 .env 文件中的环境变量
+    load_dotenv()  # 加载 .env 文件中的环境变量到内存里，别的模块不需要再加载一次了
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'  
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_ECHO'] = True  # 打印 SQL 语句（调试用）
-    app.secret_key = 'dev'
+    app.secret_key = os.getenv('SECRET_KEY')
 
     CORS(app,
          origins=["http://localhost:4321"],
