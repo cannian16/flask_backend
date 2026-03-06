@@ -70,3 +70,30 @@ def update_link():
     db.session.commit()
 
     return jsonify(link.to_dict())   
+
+@links_bp.route('/addlist', methods=['POST'])
+@token_required
+def add_links():
+    """批量添加友链"""
+    links_data = request.get_json()
+    new_links = []
+    for link_data in links_data:
+        name = link_data.get('name', '').strip()
+        url = link_data.get('url', '').strip()
+        description = link_data.get('description', '').strip()
+        icon = link_data.get('icon', '').strip()
+
+        if name and url:
+            new_link = Link(
+                name=name,
+                url=url,
+                description=description,
+                icon=icon
+            )
+            new_links.append(new_link)
+
+    if new_links:
+        db.session.add_all(new_links)
+        db.session.commit()
+
+    return jsonify({"message": f"成功添加 {len(new_links)} 个友链"}), 201

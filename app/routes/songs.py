@@ -68,3 +68,29 @@ def update_song():
     db.session.commit()
 
     return jsonify(song.to_dict())
+
+@songs_bp.route('/addlist', methods=['POST'])
+@token_required
+def add_song_list():
+    """批量添加歌曲"""
+    songs_data = request.get_json()
+    new_songs = []
+    for song_data in songs_data:
+        title = song_data.get('title').strip()
+        artist = song_data.get('artist').strip()
+        url = song_data.get('url').strip()
+        cover = song_data.get('cover').strip()
+
+        new_song = Song(
+            title=title,
+            artist=artist,
+            url=url,
+            cover=cover
+        )
+        new_songs.append(new_song)
+
+    if new_songs:
+        db.session.add_all(new_songs)
+        db.session.commit()
+
+    return jsonify({"message": f"成功添加 {len(new_songs)} 首歌曲"}), 201

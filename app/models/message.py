@@ -6,7 +6,7 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False)
     website_url = db.Column(db.String(200))
-    content = db.Column(db.String(200), nullable=False)
+    content = db.Column(db.Text, nullable=False)
     email = db.Column(db.String(100), nullable=False)
     ip_address = db.Column(db.String(45))
     user_agent = db.Column(db.String(500))

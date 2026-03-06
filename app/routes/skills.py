@@ -50,11 +50,11 @@ def create_skills():
             url=url
         )
         new_skills.append(new_skill)
+    if new_skills:
+        db.session.add_all(new_skills)
+        db.session.commit()
 
-    db.session.add_all(new_skills)
-    db.session.commit()
-
-    return jsonify([skill.to_dict() for skill in new_skills]), 201
+    return jsonify({"message": f"成功添加 {len(new_skills)} 个技能"}), 201
 
 @skills_bp.route('/delete', methods=['POST'])
 @token_required
