@@ -3,6 +3,7 @@ from .extensions import db
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
+from .utils.commands import register_commands
 
 def create_app(test_config=None):
     # create and configure the app
@@ -19,17 +20,13 @@ def create_app(test_config=None):
 
     db.init_app(app)
 
-    from . import models
-    
-    with app.app_context():
-        # Create database tables
-        db.create_all()
-
     @app.route('/')
     def hello():
         return 'Hello, World!'
 
     from .routes import register_blueprints
     register_blueprints(app)
+
+    register_commands(app)
     
     return app
