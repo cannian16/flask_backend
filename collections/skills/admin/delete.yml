@@ -1,0 +1,21 @@
+info:
+  name: delete
+  type: http
+  seq: 19
+
+http:
+  method: POST
+  url: "{{base_url}}/skills/delete"
+  body:
+    type: json
+    data: |-
+      {
+        "id" : "1"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

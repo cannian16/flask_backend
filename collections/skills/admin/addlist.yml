@@ -1,0 +1,139 @@
+info:
+  name: addlist
+  type: http
+  seq: 21
+
+http:
+  method: POST
+  url: "{{base_url}}/skills/addlist"
+  body:
+    type: json
+    data: |-
+      [
+        {
+          "imgUrl": "https://store-images.s-microsoft.com/image/apps.13971.13510798887629242.fde3f4b7-ddb2-475b-aabf-ff422a1a22df.86674486-8391-4455-ad54-d68010ac95a0?h=170",
+          "title": "EarTrumpet",
+          "url": "https://eartrumpet.app/",
+          "subtitle": "windows商店安装",
+          "content": "一款功能强大的 Windows 音量控制应用"
+        },
+        {
+          "imgUrl": "https://vip.123pan.cn/1826899604/ymjew503t0n000d7w32ygjb25xl5rjotDIYvAqY2BIQOAcx1AdFy.png",
+          "title": "QuickLook",
+          "url": "https://github.com/QL-Win/QuickLook",
+          "subtitle": "windows商店安装",
+          "content": "将 macOS 的“快速查看”功能带入 Windows 平台"
+        },  
+        {
+          "imgUrl": "https://vip.123pan.cn/1826899604/ymjew503t0n000d7w32ygjskclm1bjprDIYvAqY2BIQOAcx1AdFy.webp",
+          "url": "https://pixpin.cn/",
+          "title": "PixPin",
+          "subtitle": "windows商店安装",
+          "content": "截图、录屏、OCR - 一款快速灵活的工具。"
+        },
+        {
+            "imgUrl": "https://vip.123pan.cn/1826899604/ymjew503t0l000d7w32xkr8jz4qt9g8sDIYvAqY2BIQOAcx1AdFy.png",
+            "title": "PowerToys",
+            "url": "https://github.com/microsoft/PowerToys",
+            "subtitle": "windows商店安装",
+            "content": "微软出品的一套 Windows 实用工具合集"
+        },
+        {
+            "imgUrl": "https://img.chocolatey.org/logos/chocolatey.svg",
+            "title": "Chocolatey",
+            "url": "https://chocolatey.org/",
+            "subtitle": "windows包管理器",
+            "content": "很好用，很方便。"
+        },
+        {
+            "imgUrl": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809",
+            "title": "图吧工具箱",
+            "url": "https://www.tbtool.cn/",
+            "subtitle": "DIY工具集合",
+            "content": "一款开源、免费的硬件检测工具集合"
+        },
+        {
+            "imgUrl": "https://vip.123pan.cn/1826899604/yk6baz03t0l000d7w33fz6oz2tsot65oDIYvAqY2BIQOAcx1AdFy.webp",
+            "title": "MAS",
+            "url": "https://massgrave.dev/",
+            "subtitle": "windows激活脚本",
+            "content": "开源的 Windows 和 Office 激活器。"
+        },
+        {
+            "imgUrl": "https://www.netmount.cn/_next/static/media/color.e0ec2e9a.svg",
+            "title": "NetMount",
+            "url": "https://www.netmount.cn/",
+            "subtitle": "将网络位置挂载为本地位置",
+            "content": "统一管理和挂载云存储设施，alist＋rclone"
+        },
+        {
+            "imgUrl": "https://avatars.githubusercontent.com/u/63755826?s=48&v=4",
+            "title": "Sandboxie Plus",
+            "url": "https://sandboxie-plus.com/",
+            "subtitle": "windows沙盒软件",
+            "content": "一种基于沙盒的隔离软件，适用于 Windows NT 操作系统。"
+        },
+        {
+            "imgUrl": "https://vip.123pan.cn/1826899604/ymjew503t0l000d7w32xkrhb4mrb0ey1DIYvAqY2BIQOAcx1AdFy.png",
+            "title": "Music Tag",
+            "url": "https://www.cnblogs.com/vinlxc/p/11347744.html",
+            "subtitle": "修改音乐元数据",
+            "content": "一款可以编辑歌曲的标题，专辑，艺术家，封面等元数据的工具"
+        },
+        {
+            "imgUrl": "https://images.unsplash.com/photo-1764513168327-309c566fbc36?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "title": "Resource Hacker",
+            "url": "https://www.angusj.com/resourcehacker/",
+            "subtitle": "查看可执行文件中的资源",
+            "content": "一款为 Windows®应用程序提供的免费资源编译器和反编译器"
+        },
+        {
+            "imgUrl": "https://vip.123pan.cn/1826899604/ymjew503t0l000d7w32xkri8mdrcviheDIYvAqY2BIQOAcx1AdFy.png",
+            "title": "Windows 11 轻松设置",
+            "url": "https://bbs.pcbeta.com/viewthread-1972024-1-2.html",
+            "subtitle": "快速设置 Windows 11",
+            "content": "一键设置 Windows 11 系统的实用工具"
+        },
+        {
+            "imgUrl": "https://vip.123pan.cn/1826899604/yk6baz03t0l000d7w33fz6tahwstoq11DIYvAqY2BIQOAcx1AdFy.png",
+            "title": "ContextMenuManager",
+            "url": "https://github.com/BluePointLilac/ContextMenuManager",
+            "subtitle": "右键菜单管理",
+            "content": "🖱️ 一个纯粹的Windows右键菜单管理程序"
+        },
+        {
+            "imgUrl": "https://www.openssl-library.org/images/openssl_logo_library.svg",
+            "title": "OpenSSL",
+            "url": "https://www.openssl.org/",
+            "subtitle": "开源加密库",
+            "content": "不止创建公钥私钥，还有各种sha256，md5等哈希值生成。啥都有很全能。"
+        },
+        {
+            "imgUrl": "https://stranslate.zggsong.com/logo/logo.svg",
+            "title": "STranslate",
+            "url": "https://github.com/STranslate/STranslate",
+            "subtitle": "桌面翻译,ocr",
+            "content": "一款即用即走的翻译、OCR工具「插件系统」"
+        },
+        {
+              "imgUrl":"https://bitwarden.com/favicon.png",
+              "title": "bitwarden",
+              "url": "https://bitwarden.com/",
+              "subtitle": "密码管理器",
+              "content": "开源免费跨平台密码管理器"
+        },
+        {
+              "imgUrl":"https://antibodysoftware-17031.kxcdn.com/images/wiztree445x.png",
+              "title": "WizTree",
+              "url": "https://diskanalyzer.com/",
+              "subtitle": "磁盘分析工具",
+              "content": "一款快速的磁盘分析和清理工具"
+        }
+      ]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

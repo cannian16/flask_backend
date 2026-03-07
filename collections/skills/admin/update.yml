@@ -1,0 +1,24 @@
+info:
+  name: update
+  type: http
+  seq: 20
+
+http:
+  method: POST
+  url: "{{base_url}}/skills/update"
+  body:
+    type: json
+    data: |-
+      {
+        "id" : "1",
+        "name" : "",
+        "logo" : "",
+        "url" : ""
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,27 @@
+info:
+  name: add
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/links/add"
+  headers:
+    - name: X-API-KEY
+      value: "{{X-API-KEY}}"
+  body:
+    type: json
+    data: |-
+      {
+          "name": "Rei",
+          "icon": "https://vip.123pan.cn/1826899604/ymjew503t0l000d7w32xhnwjtgskx76sDIYvAqY2BIQOAcx1AdFy.jpg",
+          "description": "",
+          "url": "https://rei-330.github.io/"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

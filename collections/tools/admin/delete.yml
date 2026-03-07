@@ -1,0 +1,21 @@
+info:
+  name: delete
+  type: http
+  seq: 25
+
+http:
+  method: POST
+  url: "{{base_url}}/tools/delete"
+  body:
+    type: json
+    data: |-
+      {
+        "id" :"1"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

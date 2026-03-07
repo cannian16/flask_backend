@@ -1,0 +1,6 @@
+name: development
+variables:
+  - name: base_url
+    value: 127.0.0.1:5000
+  - name: X-API-KEY
+    value: "123"

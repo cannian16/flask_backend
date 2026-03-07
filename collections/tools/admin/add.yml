@@ -1,0 +1,25 @@
+info:
+  name: add
+  type: http
+  seq: 24
+
+http:
+  method: POST
+  url: "{{base_url}}/tools/add"
+  body:
+    type: json
+    data: |-
+      {
+        "imgUrl": "https://store-images.s-microsoft.com/image/apps.13971.13510798887629242.fde3f4b7-ddb2-475b-aabf-ff422a1a22df.86674486-8391-4455-ad54-d68010ac95a0?h=170",
+        "title": "EarTrumpet",
+        "url": "https://eartrumpet.app/",
+        "subtitle": "windows商店安装",
+        "content": "一款功能强大的 Windows 音量控制应用"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

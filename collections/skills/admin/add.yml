@@ -1,0 +1,23 @@
+info:
+  name: add
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/skills/add"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Insomnia",
+        "logo": "https://vip.123pan.cn/1826899604/yk6baz03t0m000dc7w3b0pv8zw82j7tiDIYvAqY2BIQOAcx1AdFy.png",
+        "url": "https://insomnia.rest/"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

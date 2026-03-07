@@ -1,0 +1,28 @@
+info:
+  name: update
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/songs/update"
+  headers:
+    - name: X-API-KEY
+      value: "{{X-API-KEY}}"
+  body:
+    type: json
+    data: |-
+      {
+        "id" : "",
+        "title" : "Old Stories",
+        "artist" : "Kevin Penkin",
+        "url" : "https://vip.123pan.cn/1826899604/20984018",
+        "cover" : "https://vip.123pan.cn/1826899604/yk6baz03t0m000d7w33gnm3pla47ht3dDIYvAqY2BIQOAcx1AdFy.jpg"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
