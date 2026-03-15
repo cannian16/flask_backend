@@ -1,0 +1,13 @@
+.env
+.git
+.gitignore
+__pycache__
+instance
+.venv
+README.md
+blog-documentation.html
+main.py
+.dockerignore
+Dockerfile
+collections
+.python-version

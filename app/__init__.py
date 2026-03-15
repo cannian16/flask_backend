@@ -11,13 +11,13 @@ def create_app(test_config=None):
     load_dotenv()  # 加载 .env 文件中的环境变量到内存里，别的模块不需要再加载一次了
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'  
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_ECHO'] = True  # 打印 SQL 语句（调试用）
+    app.config['SQLALCHEMY_ECHO'] = False  # 打印 SQL 语句（调试用）
     app.secret_key = os.getenv('SECRET_KEY')
     ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:4321").split(",")
-
+    print("Allowed origins:", ALLOWED_ORIGINS)  # 调试输出，确认环境变量是否正确加载
     CORS(app,
          origins=ALLOWED_ORIGINS,
-         supports_credentials=True) # 允许所有来源的跨域请求
+         supports_credentials=True)
 
     db.init_app(app)
 

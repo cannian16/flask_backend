@@ -27,9 +27,21 @@ uv run flask run
 项目结构典的不能再典了，不用说了就，很简单的项目。
 
 # 注意事项
-.env需要自己创建，里面有3个字段,生产环境和开发环境是分别两个环境变量
+.env需要自己创建，里面有3个字段,生产环境和开发环境是分别两个环境变量。docker-compose的时候也要加上这环境变量
 ```text
 ADMIN_TOKEN=123
 SECRET_KEY=dev
 ALLOWED_ORIGINS=http://localhost:4321
+```
+```docker-compose.yml
+services:
+  flask_backend:
+    imsage: flask_backend:latest
+    container_name: flask_backend
+    environment:
+      TZ: "Asia/Shanghai"
+    volumes:
+      - ./instance:/flask_backend/instance
+    ports:
+      - "5000:5000"
 ```
